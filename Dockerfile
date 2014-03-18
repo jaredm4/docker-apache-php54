@@ -3,12 +3,13 @@
 # To use Mongo driver, add this to your Dockerfile:
 # RUN php5enmod mongo
 #
-# VERSION: 1.7
+# VERSION: 1.8
 # DOCKER-VERSION: 0.9.0
 # AUTHOR: Jared Markell <jaredm4@gmail.com>
 # TO_BUILD: docker build -rm -t jaredm4/apache-php54 .
 # TO_RUN: docker run -d -p 80:80 jaredm4/apache-php54
 # CHANGELOG:
+# 1.8 Upped upload max size to 10M.
 # 1.7 prod.ini enhancements
 # 1.6 Added php5-cli
 # 1.5 Volume'd the /var/log directory entirely.
@@ -33,13 +34,13 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu raring main restricted universe m
     rm -rf /var/lib/apt/lists/*
 
 # PHP prod config
-ADD prod.ini /etc/php5/conf.d/prod.ini
+ADD files/prod.ini /etc/php5/conf.d/prod.ini
 
 # Ensure PHP log file exists and is writable
 RUN touch /var/log/php_errors.log && chmod a+w /var/log/php_errors.log
 
 # Our start-up script
-ADD start.sh /start.sh
+ADD files/start.sh /start.sh
 RUN chmod a+x /start.sh
 
 # Turn on some crucial apache mods
