@@ -3,8 +3,8 @@
 # To use Mongo driver, add this to your Dockerfile:
 # RUN php5enmod mongo
 #
-# VERSION: 1.8
-# DOCKER-VERSION: 0.9.0
+# VERSION: 1.9
+# DOCKER-VERSION: 0.9.1
 # AUTHOR: Jared Markell <jaredm4@gmail.com>
 # TO_BUILD: docker build -rm -t jaredm4/apache-php54 .
 # TO_RUN: docker run -d -p 80:80 jaredm4/apache-php54
@@ -21,8 +21,12 @@ FROM ubuntu:13.04
 
 MAINTAINER Jared Markell, jaredm4@gmail.com
 
-# Setup locale and home - helps when using bash or Composer
-RUN locale-gen en_US
+# Set the locale
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
 ENV HOME /root
 
 # Utilities and Apache, PHP
